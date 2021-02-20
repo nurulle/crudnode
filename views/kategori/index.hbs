@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Kategori</title>
+  </head>
+
+  <body>
+    <h1>{{title}}</h1>
+
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah Data</button>
+
+    <table class="table" id="tabel-kategori">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">No</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Opsi</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {{!-- each : looping --}}
+        {{#each kategori}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{kategori_nama}}</td>
+                <td>
+                    <button id="btn-edit" class="btn btn-warning" data-id="{{ id }}" data-kategori_nama="{{ kategori_nama }}">Edit</button>
+                    <button id="btn-hapus" class="btn btn-danger" data-id={{id}}>Hapus</button>
+                </td>
+            </tr>
+
+        {{/each}}
+    </tbody>
+    </table>
+
+
+    <!-- Modal Tambah Kategori-->
+
+    <form action="/view/kategori/save" method="POST">
+    <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="from-group">
+                        <label for="">Nama Kategori</label>
+                        <input type="text" name="kategori_nama" class="from-control" placeholder="Isikan Nama Kategori">
+                    </div>                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+ <!-- Modal Edit Kategori-->
+
+    <form action="/view/kategori/update" method="POST">
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="from-group">
+                        <label for="">Nama Kategori</label>
+                        <input type="hidden" name="id" id="id_edit"> 
+                        <input type="text" id="kategori_nama_edit" name="kategori_nama" class="from-control" placeholder="Isikan Nama Katogori">
+                    </div>                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+     {{!-- Modal Hapus --}}
+    <form action="/view/kategori/delete" method="POST">
+        <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-titlmodale" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Yakin mau dihapus ?</p>
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id_hapus">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+    <script>
+        $(document).ready(function(){
+            $('#tabel-kategori').on('click', '#btn-edit', function(){
+                let id = $(this).data('id');
+                let kategori_nama = $(this).data('kategori_nama');
+                $('#modalEdit').modal('show');
+                $('#id_edit').val(id);
+                $('#kategori_nama_edit').val(kategori_nama);
+
+                console.log("ID ",id)
+                console.log("Nama ", kategori_nama);
+
+            });
+
+            $('#tabel-kategori').on('click', '#btn-hapus', function(){
+                let id = $(this).data('id');
+                $('#modalHapus').modal('show');
+                $('#id_hapus').val(id);
+                console.log(id)
+            })
+        });
+
+        
+    </script>
+  </body>
+</html>
