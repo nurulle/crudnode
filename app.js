@@ -308,7 +308,7 @@ app.delete('/api/buku/:id_buku', (req, res) => {
 
 //console.log(process.env);
 
-const port = 2000;
+const port = process.env.PORT || 2000;
 
 app.listen(port, () => {
     console.log("server jalan di port " + port);
