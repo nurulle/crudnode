@@ -148,8 +148,13 @@
                 $('#modalHapus').modal('show');
                 $('#id_hapus').val(id);
                 console.log(id)
-            })
+            });
         });
+
+
+        fetch('http://localhost:2000/api/kategori')
+        .then(data => data.json())
+        .then(data => console.log(data))
 
         
     </script>

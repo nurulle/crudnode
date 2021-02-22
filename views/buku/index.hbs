@@ -37,7 +37,7 @@
                     <td>{{tahun_terbit}}</td>
                     <td>
                         <button id="btn-edit" class="btn btn-warning" data-id="{{ id_buku }}" data-judul="{{ judul }}" data-pengarang="{{ pengarang }}" data-penerbit="{{ penerbit }}" data-tahun_terbit="{{ tahun_terbit }}">Edit</button>
-                        <button id="btn-hapus" class="btn btn-danger" data-id="{{id}}">Hapus</button>
+                        <button id="btn-hapus" class="btn btn-danger" data-id="{{id_buku}}">Hapus</button>
                     </td>
                 </tr>
             {{/each}}
@@ -59,16 +59,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="from-group">
-                            <label for="">Judul</label>
+                            <label for="">Judul</label><br>
                             <input type="text" name="judul" class="from-control" placeholder="Isikan Nama Judul"><br>
 
-                            <label for="">Pengarang</label>
+                            <label for="">Pengarang</label><br>
                             <input type="text" name="pengarang" class="from-control" placeholder="Isikan Nama Pengarang"><br>
 
-                            <label for="">Penerbit</label>
+                            <label for="">Penerbit</label><br>
                             <input type="text" name="penerbit" class="from-control" placeholder="Isikan Nama Penerbit"><br>
 
-                            <label for="">Tahun Terbit</label>
+                            <label for="">Tahun Terbit</label><br>
                             <input type="number" name="tahun_terbit" class="from-control" placeholder="Isikan Tahun Terbit">
                         </div>                
                     </div>
@@ -96,13 +96,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="from-group">
-                        <label for="">Nama Buku</label>
-                        <input type="hidden" name="id" id="id_edit"> 
-                        <input type="text" id="judul_edit" name="judul" class="from-control" placeholder="Isikan Judul">
-                        <input type="text" id="pengarang_edit" name="pengarang" class="from-control" placeholder="Isikan Nama pengarang">
-                        <input type="text" id="penerbit_edit" name="penerbit" class="from-control" placeholder="Isikan Nama penerbit">
-                        <input type="text" id="tahun_terbit_edit" name="tahun_terbit" class="from-control" placeholder="Isikan Nama pengarang">
-                    
+                        
+                        <input type="hidden" name="id_buku" id="id_edit"><br>
+                        <label for="">Judul Buku</label><br>
+                        <input type="text" id="judul_edit" name="judul" class="from-control" placeholder="Isikan Judul"><br>
+                        <label for="">Nama Pengarang</label><br>
+                        <input type="text" id="pengarang_edit" name="pengarang" class="from-control" placeholder="Isikan Nama pengarang"><br>
+                        <label for="">Nama Penerbit</label><br>
+                        <input type="text" id="penerbit_edit" name="penerbit" class="from-control" placeholder="Isikan Nama penerbit"><br>
+                        <label for="">Tahun Terbit</label><br>
+                        <input type="text" id="tahun_terbit_edit" name="tahun_terbit" class="from-control" placeholder="Isikan Tahun Terbit">
                     </div>                
                 </div>
                 <div class="modal-footer">
@@ -152,7 +155,7 @@
    <script>
         $(document).ready(function(){
             $('#tabel-buku').on('click', '#btn-edit', function(){
-                let id id_buku= $(this).data('id_buku');
+                let id_buku = $(this).data('id');
                 let judul = $(this).data('judul');
                 let pengarang = $(this).data('pengarang');
                 let penerbit = $(this).data('penerbit');
@@ -165,21 +168,26 @@
                 $('#tahun_terbit_edit').val(tahun_terbit);
 
                 console.log("ID ",id_buku)
-                console.log("Nama ", judul);
-                console.log("Nama ", pengarang);
-                console.log("Nama ", penerbit);
-                console.log("Nama ", tahun_terbit);
-                
+                console.log("Judul ", judul);
+                console.log("Pengarang ", pengarang);
+                console.log("Penerbit ", penerbit);
+                console.log("Tahun Terbit ", tahun_terbit);
             });
 
-            $('#tabel-kategori').on('click', '#btn-hapus', function(){
+            $('#tabel-buku').on('click', '#btn-hapus', function(){
                 let id_buku = $(this).data('id');
                 $('#modalHapus').modal('show');
-                $('#id_hapus').val(id)id_buku;
+                $('#id_hapus').val(id_buku);
                 console.log(id_buku)
-            })
+            });
         });
 
 
+        fetch('http://localhost:2000/api/buku')
+        .then(data => data.json())
+        .then(data => console.log(data))
+
+
+    </script>
   </body>
 </html>
